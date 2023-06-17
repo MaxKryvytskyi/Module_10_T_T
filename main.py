@@ -1,5 +1,9 @@
-import my_class as oop
 import re
+
+
+import my_class as oop
+
+
 adress_book = oop.AddtextsBook()
 flag_exit = True
 

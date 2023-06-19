@@ -23,23 +23,23 @@ class Phone(Field):
 
 
 class Record:
-    def __init__(self, name, phone=None):
+    def __init__(self, name, phones=None):
         self.name = name
         self.phones = []
-        if type(phone) == list:
-            self.phones.extend(phone)
+        if type(phones) == list:
+            self.phones.extend(phones)
         else: 
-            self.phones.append(phone)
+            self.phones.append(phones)
 
-    def add_phone(self, phone: Phone):
-        if phone.value not in [phone.value for phone in self.phones]:
-            self.phones.append(phone)
+    def add_phone(self, phones: Phone):
+        if phones.value not in [phones.value for phones in self.phones]:
+            self.phones.append(phones)
         else:
             print("This phone already added.")
 
-    def remove_phone(self, phone: Phone):
+    def remove_phone(self, phones: Phone):
         for n in self.phones:
-            if n.value == phone.value:
+            if n.value == phones.value:
                 self.phones.remove(n)
 
     def edit_phone(self, old_phone: Phone, new_phone: Phone):

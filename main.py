@@ -1,10 +1,9 @@
 import re
 
 
-import my_class as oop
+from my_class import AddtextsBook, Record, Name, Phone
 
-
-adress_book = oop.AddtextsBook()
+adress_book = AddtextsBook()
 flag_exit = True
 
 # Обробка помилок.
@@ -38,7 +37,7 @@ def hello(_):
 @input_error
 def add(uzer_input):
     text = uzer_input.split()
-    rec = oop.Record(oop.Name(text[1].capitalize()), [oop.Phone(text[2])])
+    rec = Record(Name(text[1].capitalize()), [Phone(text[2])])
     adress_book.add_record(rec)
     return f"Контакт {text[1].capitalize()} з номером {text[2]} створений"
 
@@ -54,7 +53,7 @@ def change(uzer_input):
     text = uzer_input.split()
     rec = adress_book[text[1].capitalize()]
     ret = f"{rec.name.value} : {[phone.value for phone in adress_book[rec.name.value].phones]}\n" + "Змінено на\n"
-    rec.edit_phone(oop.Phone(text[2]), oop.Phone(text[3]))
+    rec.edit_phone(Phone(text[2]), Phone(text[3]))
     ret += f"{rec.name.value} : {[phone.value for phone in rec.phones]}"
     return ret
     
@@ -71,7 +70,7 @@ def phone(uzer_input):
 def remove_phones(uzer_input):
     text = uzer_input.split()
     rec = adress_book[text[2].capitalize()]
-    rec.remove_phone(oop.Phone(text[3]))
+    rec.remove_phone(Phone(text[3]))
     return f"Номер телефону {text[2]} : {text[3]}\nВидалений"
 
 # Ассистент показує всі контактні дані.
@@ -92,13 +91,13 @@ def exit_uzer(_):
 # Список команд.
 COMMANDS = {"hello": hello, # Виводить привітання
             "add" : add, # Додає контакт в книгу контактів 
-            "change": change, #
+            "change": change, # Заміна телефону A на телефон B 
+            "remove phone" : remove_phones, # Видаляє телефон 
             "phone" : phone, # Виводить номер телефону за ім'ям
             "show all" : show_all, # Показує книгу контактів
             "good bye" : exit_uzer, # Виходить з асистента
             "close" : exit_uzer, # Виходить з асистента
-            "exit" : exit_uzer, # Виходить з асистента
-            "remove phone" : remove_phones # Видаляє телефон 
+            "exit" : exit_uzer # Виходить з асистента
             }
 
 # Знаходить команду.
